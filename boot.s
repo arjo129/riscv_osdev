@@ -70,7 +70,10 @@ _trap_vector:
     sd      t4, 224(sp)
     sd      t5, 232(sp)
     sd      t6, 240(sp)
-    j timer_interrupt
+    csrr    a0, mcause
+    call timer_interrupt
+.global _pop_stack
+_pop_stack:
     ld      ra, 0(sp)
     ld      sp, 8(sp)
     ld      gp, 16(sp)
