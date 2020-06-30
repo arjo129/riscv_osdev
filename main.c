@@ -32,6 +32,14 @@ void timer_interrupt() {
     uart_putc(UART_BASE, 'r');
     uart_putc(UART_BASE, '\n');
 }
-void generic_interrupt(uint64_t mcause) {
 
+#define MTIMER_INTERRUPT 7
+void generic_interrupt(uint64_t mcause) {
+    uint64_t type = mcause & 0x7FFFFFFFFFFFFFFF;
+    uint64_t interrupt = mcause & 0x8000000000000000;
+    if(interrupt) {
+        if(type == MTIMER_INTERRUPT) {
+            timer_interrupt();
+        }
+    } 
 }

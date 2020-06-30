@@ -71,7 +71,7 @@ _trap_vector:
     sd      t5, 232(sp)
     sd      t6, 240(sp)
     csrr    a0, mcause
-    call timer_interrupt
+    call    generic_interrupt
     ld      ra, 0(sp)
     ld      sp, 8(sp)
     ld      gp, 16(sp)
