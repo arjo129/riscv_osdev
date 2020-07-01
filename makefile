@@ -15,14 +15,14 @@ OPTS+=-device virtio-net-device -device virtio-tablet-device -device virtio-keyb
 ## C Compiler
 ####
 CFLAGS= -Wall -Wextra -pedantic -Wextra -O0 -g
-CFLAGS+= -static -ffreestanding -nostdlib -fno-rtti -fno-exceptions
-CFLAGS+= -march=rv64gc -mabi=lp64
+CFLAGS+= -static -ffreestanding -nostdlib -fno-exceptions
+CFLAGS+= -march=rv64gc -mabi=lp64 -mcmodel=medany
 
 SOURCES_ASM=boot.s main.c mmio.c uart.c
 LINKER_SCRIPT= -Tlinker.ld
 
 OUT=kernel.elf
-cc=riscv-none-embed-gcc
+cc=riscv64-unknown-linux-gnu-gcc
 
 all:
 	$(cc) $(CFLAGS) $(LINKER_SCRIPT) -o $(OUT) $(SOURCES_ASM)
