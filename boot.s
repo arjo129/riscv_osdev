@@ -38,7 +38,7 @@ _hang:
 
 .global _trap_vector
 _trap_vector:
-    addi    sp, sp, -256
+    addi    sp, sp, -264
     sd      ra, 0(sp)
     sd      sp, 8(sp)
     sd      gp, 16(sp)
@@ -71,7 +71,13 @@ _trap_vector:
     sd      t5, 232(sp)
     sd      t6, 240(sp)
     csrr    a0, mcause
+    add     a1, sp, 0
+    csrr    a2, mepc
+    sd      a2, 248(sp)
     call    generic_interrupt
+    add     sp, a0, 0
+    ld      a0, 248(sp)
+    csrw    mepc, a0
     ld      ra, 0(sp)
     ld      sp, 8(sp)
     ld      gp, 16(sp)
@@ -103,7 +109,7 @@ _trap_vector:
     ld      t5, 232(sp)
     ld      t6, 240(sp)
 
-    addi    sp, sp, 256
+    addi    sp, sp, 264
 
     mret
 

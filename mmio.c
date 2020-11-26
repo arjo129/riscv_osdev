@@ -16,11 +16,23 @@ uint8_t mmio_read(unsigned long address, int offset)
 void mmio_write64(unsigned long address, int offset, uint64_t value)
 {
 	volatile uint64_t *reg = (uint64_t *)address;
-	*(reg + offset) = value;
+	*(reg + offset*sizeof(uint64_t)) = value;
 }
 
 uint64_t mmio_read64(unsigned long address, int offset)
 {
 	volatile uint64_t *reg = (uint64_t *)address;
-	return *(reg + offset);
+	return *(reg + offset*sizeof(uint64_t));
+}
+
+void mmio_write32(unsigned long address, int offset, uint32_t value)
+{
+	volatile uint32_t *reg = (uint32_t *)address;
+	*(reg + offset*sizeof(uint32_t)) = value;
+}
+
+uint32_t mmio_read32(unsigned long address, int offset)
+{
+	volatile uint32_t *reg = (uint32_t *)address;
+	return *(reg + offset*sizeof(uint32_t));
 }

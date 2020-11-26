@@ -10,4 +10,8 @@ void mmio_write64(unsigned long address, int offset, uint64_t value);
 
 uint64_t mmio_read64(unsigned long address, int offset);
 
+void mmio_write32(unsigned long address, int offset, uint32_t value);
+
+uint32_t mmio_read32(unsigned long address, int offset);
+
 #endif
