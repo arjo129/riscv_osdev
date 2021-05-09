@@ -1,5 +1,5 @@
 # RISC-V OS
-Currently implements barebones required to boot and print hello on qemu.
+Currently implements a simple round-robin multi-tasking RTOS in just a few files. Not meant for production use, rather meant for my own learning.
 
 ## Building
 Make sure you have the `riscv-none-embed` toolchain from `xpack`. Run `make`.
